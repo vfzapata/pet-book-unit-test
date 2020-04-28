@@ -16,7 +16,7 @@ pipeline {
       steps {
         nodejs(nodeJSInstallationName: 'nodejs12') {
           sh 'npm run test-ci'
-          junit 'TEST-*.xml'
+          junit 'TESTS-*.xml'
           archiveArtifacts(artifacts: 'coverage/**', onlyIfSuccessful: true)
         }
       }

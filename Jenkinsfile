@@ -6,7 +6,7 @@ pipeline {
         nodejs(nodeJSInstallationName: 'nodejs') {
           sh 'npm install'
           sh 'npm run build --skip-test'
-          archiveArtifacts(artifacts: 'dist/*', onlyIfSuccessful: true)
+          archiveArtifacts(artifacts: 'dist/**', onlyIfSuccessful: true)
         }        
       }
     }
@@ -16,7 +16,7 @@ pipeline {
         nodejs(nodeJSInstallationName: 'nodejs') {
           sh 'npm run test-ci'
           junit 'TEST-*.xml'
-          archiveArtifacts(artifacts: 'coverage/', onlyIfSuccessful: true)
+          archiveArtifacts(artifacts: 'coverage/**', onlyIfSuccessful: true)
         }
       }
     }

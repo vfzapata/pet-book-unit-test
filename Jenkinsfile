@@ -40,7 +40,7 @@ pipeline {
 
     stage('deploy') {
       steps {
-        s3Upload(bucket: 'pet-book-profe-2020', file:'dist/**')
+        s3Upload(bucket: 'pet-book-profe-2020', file:'dist')
       }
     }
 

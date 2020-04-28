@@ -9,16 +9,20 @@ pipeline {
   stages {
     stage('build sin test') {
       steps {
-        sh 'npm install & npm run build --skip-test'
-        archiveArtifacts(artifacts: 'dist/*', onlyIfSuccessful: true)
+        nodejs(nodeJSInstallationName: 'nodejs') {
+          sh 'npm install & npm run build --skip-test'
+          archiveArtifacts(artifacts: 'dist/*', onlyIfSuccessful: true)
+        }        
       }
     }
 
     stage('unitTest') {
       steps {
-        sh 'npm run test-ci'
-        junit 'TEST-*.xml'
-        archiveArtifacts(artifacts: 'coverage/', onlyIfSuccessful: true)
+        nodejs(nodeJSInstallationName: 'nodejs') {
+          sh 'npm run test-ci'
+          junit 'TEST-*.xml'
+          archiveArtifacts(artifacts: 'coverage/', onlyIfSuccessful: true)
+        }
       }
     }
 

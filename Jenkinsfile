@@ -27,7 +27,8 @@ pipeline {
         script{
           def scannerHome = tool 'sonar-scanner';
           withSonarQubeEnv('sonar-cloud') {
-            sh "${scannerHome}/bin/sonar-scanner -Dsonar.branch.name=$BRANCH_NAME"          
+            echo "branch_name: $BRANCH_NAME"
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.branch.name=${BRANCH_NAME}"          
           }
           def qualitygate = waitForQualityGate()
           if (qualitygate.status != "OK") {
@@ -39,7 +40,7 @@ pipeline {
 
     stage('deploy') {
       steps {
-        s3Upload(bucket: 'pet-book-profe-2020', path: 'dist/**')
+        s3Upload(bucket: 'pet-book-profe-2020', file:'dist/**', path:'dist/**')
       }
     }
 

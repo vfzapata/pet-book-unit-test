@@ -13,6 +13,7 @@ pipeline {
     }
 
     stage('unitTest') {
+      agent { label 'e2e' }
       steps {
         nodejs(nodeJSInstallationName: 'nodejs12') {
           sh 'npm run test-ci'

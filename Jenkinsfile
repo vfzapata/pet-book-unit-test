@@ -4,7 +4,8 @@ pipeline {
     stage('build sin test') {
       steps {
         nodejs(nodeJSInstallationName: 'nodejs') {
-          sh 'npm install & npm run build --skip-test'
+          sh 'npm install'
+          sh 'npm run build --skip-test'
           archiveArtifacts(artifacts: 'dist/*', onlyIfSuccessful: true)
         }        
       }

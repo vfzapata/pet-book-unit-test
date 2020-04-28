@@ -8,7 +8,7 @@ pipeline {
           sh 'npm rebuild'
           sh 'npm run build --skip-test'
           archiveArtifacts(artifacts: 'dist/**', onlyIfSuccessful: true)
-          stash name: "ws", includes: "*"
+          stash name: "ws", includes: "**"
         }        
       }
     }

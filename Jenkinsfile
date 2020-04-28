@@ -40,7 +40,9 @@ pipeline {
 
     stage('deploy') {
       steps {
-        s3Upload(bucket: 'pet-book-profe-2020', file:'dist')
+        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+          s3Upload(bucket: 'pet-book-profe-2020', file:'dist')
+        }        
       }
     }
 

@@ -24,14 +24,16 @@ pipeline {
 
     stage('static analysis') {
       steps {
-        def scannerHome = tool 'sonar-scanner';
-        withSonarQubeEnv('sonar-cloud') {
-          sh "${scannerHome}/bin/sonar-scanner"          
-        }
-        def qualitygate = waitForQualityGate()
-        if (qualitygate.status != "OK") {
-          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-        }
+        script{
+          def scannerHome = tool 'sonar-scanner';
+          withSonarQubeEnv('sonar-cloud') {
+            sh "${scannerHome}/bin/sonar-scanner"          
+          }
+          def qualitygate = waitForQualityGate()
+          if (qualitygate.status != "OK") {
+            error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+          }
+        }        
       }
     }
 

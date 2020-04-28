@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build sin test') {
       steps {
-        nodejs(nodeJSInstallationName: 'nodejs8') {
+        nodejs(nodeJSInstallationName: 'nodejs12') {
           sh 'npm install'
           sh 'npm run build --skip-test'
           archiveArtifacts(artifacts: 'dist/**', onlyIfSuccessful: true)
@@ -13,7 +13,7 @@ pipeline {
 
     stage('unitTest') {
       steps {
-        nodejs(nodeJSInstallationName: 'nodejs8') {
+        nodejs(nodeJSInstallationName: 'nodejs12') {
           sh 'npm run test-ci'
           junit 'TEST-*.xml'
           archiveArtifacts(artifacts: 'coverage/**', onlyIfSuccessful: true)

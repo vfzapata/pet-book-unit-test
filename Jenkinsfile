@@ -21,12 +21,14 @@ pipeline {
           sh 'npm run test-ci'
           junit 'TESTS-*.xml'
           archiveArtifacts(artifacts: 'coverage/**', onlyIfSuccessful: true)
+          stash name:"cov", includes: "coverage/**"
         }
       }
     }
 
     stage('static analysis') {
       steps {
+        unstash "cov" 
         nodejs(nodeJSInstallationName: 'nodejs12') {
           script{
             def scannerHome = tool 'sonar-scanner';

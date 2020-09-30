@@ -47,3 +47,13 @@ steps:
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
+
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'aws-cuentapoc'
+    regionName: 'us-east-1'
+    bucketName: 'cacevedod-udem2-petbook'
+    sourceFolder: '$(Build.ArtifactStagingDirectory)'
+    globExpressions: '*.zip'
+    targetFolder: 'artefactos'
+    createBucket: true

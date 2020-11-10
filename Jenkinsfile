@@ -29,7 +29,7 @@ pipeline {
         nodejs('node') {
           script {
             def scannerHome = tool 'sonar-scanner';
-            withSonarQubeEnv('sonar-cloud') {
+            withSonarQubeEnv('sonar-cloud-equipo5') {
               echo "branch_name: $BRANCH_NAME"
               sh "${scannerHome}/bin/sonar-scanner"
             }

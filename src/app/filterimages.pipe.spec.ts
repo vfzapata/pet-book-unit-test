@@ -30,7 +30,7 @@ describe('FilterimagesPipe', () => {
     expect(resultGatoFilter.length).toEqual(2);
   });
 
-  it('should returns an error when filter does not exist', () => {
+  it('should returns empty array when filter does not exist', () => {
     const resultInvalidFilter = pipe.transform(listOfPets, 'allFilter');
     expect(resultInvalidFilter).toEqual([]);
     expect(resultInvalidFilter.length).toEqual(0);

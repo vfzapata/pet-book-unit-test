@@ -3,6 +3,7 @@ import { ImageService } from '../image.service';
 import { ImageDetailComponent } from './image-details.component';
 import { ActivatedRoute } from '@angular/router';
 import { By } from '@angular/platform-browser';
+// minor change
 
 describe('ImageDetailsComponent', () => {
   let component: ImageDetailComponent;

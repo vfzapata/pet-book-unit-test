@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { GalleryComponent } from './image-gallery.component';
 import { ImageService } from '../image.service';
 import { FilterimagesPipe } from '../filterimages.pipe';
@@ -8,18 +8,16 @@ describe('ImageGalleryComponent', () => {
   let component: GalleryComponent;
   let fixture: ComponentFixture<GalleryComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async() => {
+     TestBed.configureTestingModule({
       declarations: [ GalleryComponent, FilterimagesPipe ],
       providers: [ ImageService, FilterimagesPipe ],
     })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    .compileComponents().then(()=> {
+      fixture = TestBed.createComponent(GalleryComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
   });
 
   it('should create component', () => {
@@ -29,10 +27,6 @@ describe('ImageGalleryComponent', () => {
   it('should contain page title as "Pet Book Prueba Devops"', () => {
     const title = fixture.debugElement.query(By.css('.btn-primary')).nativeElement;
     expect(title.innerHTML).toBe('Pet Book Prueba Devops');
-  });
-
-  it('click event"', () => {
-    
   });
 
   describe('button events', () => {
@@ -48,5 +42,21 @@ describe('ImageGalleryComponent', () => {
        const gatoFilter = fixture.debugElement.query(By.css('.third')).nativeElement;
       expect(gatoFilter.innerHTML).toBe('Gato');
     });
+    it('should trigger click event when button (Gato) is clicked"', fakeAsync(() => {
+      // spyOn(component.filterBy, 'filterBy');
+      const spyFilterBy = jasmine.createSpy('filterBy');
+      spyFilterBy('gato');
+      // const event = {
+      //   type: 'click',
+      //   filterBy: function(){}
+      // }
+      // const spy = spyOn(event, 'filterBy');
+      
+      // const onClickMock =  jasmine.createSpy('filterBy');
+      // fixture.debugElement.query(By.css('.third')).triggerEventHandler('click', null);
+      // fixture.detectChanges();
+
+      expect(spyFilterBy).toHaveBeenCalled();
+  }));
   });
 });

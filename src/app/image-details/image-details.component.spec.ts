@@ -30,9 +30,12 @@ describe('ImageDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should render a single image', () => {
-    const findImage = fixture.debugElement.query(By.css('.img-container')).nativeElement;
+    const elementImage = fixture.debugElement.query(By.css('.img-container')).nativeElement;
     fixture.detectChanges();
-    // expect(findImage.length).toEqual(0);
-    expect(findImage).toBeTruthy();
+    expect(elementImage).toBeTruthy();
+
+    const element = fixture.debugElement.query(By.css('.img-container')).nativeElement;
+    fixture.detectChanges();
+    expect(element.style.getPropertyValue("background-image")).toBe(`url("assets/images/perro1.jpg")`);
   });
 });
